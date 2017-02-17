@@ -1,23 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+    <v-header></v-header>
+    <div class="tab">
+      <div class="tab-item">商品</div>
+      <div class="tab-item">评论</div>
+      <div class="tab-item">商家</div>
+    </div>
   </div>
 </template>
 
 <script>
+import header from './components/header/v-header.vue';
+
 export default {
-  name: 'app'
-}
+    components: {
+        'v-header': header
+    }
+};
+
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus" rel="stylesheet/stylus">
+  .app
+    .tab
+      display: flex
+      width: 100%
 </style>
