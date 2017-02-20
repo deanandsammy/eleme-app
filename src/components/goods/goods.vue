@@ -1,6 +1,6 @@
 <template>
-  <div class="header">
-    我是头部
+  <div>
+    I am goods
   </div>
 </template>
 
@@ -10,6 +10,6 @@
   }
 </script>
 
-<style>
+<style lang="stylus" rel="stylesheet/stylus">
 
 </style>

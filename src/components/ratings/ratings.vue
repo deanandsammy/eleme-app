@@ -1,6 +1,6 @@
 <template>
-  <div class="header">
-    我是头部
+  <div>
+    I am rating
   </div>
 </template>
 
