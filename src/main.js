@@ -16,7 +16,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  linkActiveClass: 'active'
 })
 
 /* eslint-disable no-new */
@@ -24,3 +25,5 @@ new Vue({
   router,
   extends: App
 }).$mount('#app')
+
+router.push('/goods')
