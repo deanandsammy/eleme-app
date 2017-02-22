@@ -7,6 +7,8 @@ import Good from './components/goods/goods'
 import Ratings from './components/ratings/ratings'
 import Sellers from './components/sellers/sellers'
 
+import './common/stylus/index.styl'
+
 Vue.use(VueRouter)
 
 const routes = [
