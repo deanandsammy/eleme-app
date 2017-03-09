@@ -21,8 +21,22 @@
   import header from './components/header/v-header.vue'
 
   export default {
+    data () {
+      return {
+        seller: {}
+      }
+    },
     components: {
       'v-header': header
+    },
+    created () {
+      this.$http.get('api/seller').then((response) => {
+        response = response.data
+
+        if (response.errno === 0) {
+          this.seller = response.data
+        }
+      })
     }
   }
 

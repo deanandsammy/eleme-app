@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
+import Axios from 'axios'
 import Good from './components/goods/goods'
 import Ratings from './components/ratings/ratings'
 import Sellers from './components/sellers/sellers'
@@ -10,6 +11,9 @@ import Sellers from './components/sellers/sellers'
 import './common/stylus/index.styl'
 
 Vue.use(VueRouter)
+Vue.use(Axios)
+
+Vue.prototype.$http = Axios
 
 const routes = [
   {path: '/goods', component: Good},
