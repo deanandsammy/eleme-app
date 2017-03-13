@@ -12,9 +12,9 @@
         <div class="description">
           {{seller.description}} / {{seller.deliveryTime}}分钟送达
         </div>
-        <div class="support" v-if="seller.supports">
+        <div class="support" v-if="seller.support">
           <span class="icon"></span>
-          <span class="text">{{seller.supports[0].description}}</span>
+          <span class="text">{{seller.support[0].description}}</span>
         </div>
       </div>
     </div>
@@ -33,13 +33,32 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import "../../common/stylus/mixin.styl"
   .header
     color: #fff
     background-color: rgba(0, 0, 0, .5)
     .content-wrapper
       padding: 24px 12px 18px 24px
+      font-size: 0
       .avatar
         display: inline-block
       .content
         display: inline-block
+        margin-left: 16px
+        font-size: 14px
+        .title
+          margin: 2px 0 8px
+          .brand
+            display: inline-block
+            width: 30px
+            height: 18px
+            vertical-align: top
+            bg-image('brand')
+            background-size: 30px 18px
+            background-repeat: no-repeat
+            .name
+              margin-left: 6px
+              font-size: 16px
+              line-height: 18px
+              font-weight: bold
 </style>
