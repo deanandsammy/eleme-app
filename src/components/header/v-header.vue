@@ -13,7 +13,7 @@
           {{seller.description}} / {{seller.deliveryTime}}分钟送达
         </div>
         <div class="support" v-if="seller.support">
-          <span class="icon"></span>
+          <span class="icon" v-bind:class="classMap[seller.support[2].type]"></span>
           <span class="text">{{seller.support[0].description}}</span>
         </div>
       </div>
@@ -28,6 +28,9 @@
       seller: {
         type: Object
       }
+    },
+    created () {
+        this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
     }
   }
 </script>
@@ -42,6 +45,8 @@
       font-size: 0
       .avatar
         display: inline-block
+        img
+          border-radius: 2px
       .content
         display: inline-block
         margin-left: 16px
@@ -52,13 +57,40 @@
             display: inline-block
             width: 30px
             height: 18px
-            vertical-align: top
+            vertical-align: middle
             bg-image('brand')
             background-size: 30px 18px
             background-repeat: no-repeat
-            .name
-              margin-left: 6px
-              font-size: 16px
-              line-height: 18px
-              font-weight: bold
+          .name
+            margin-left: 6px
+            font-size: 16px
+            line-height: 18px
+            vertical-align: middle
+            font-weight: bold
+        .description
+          margin-bottom: 10px
+          line-height: 12px
+          font-size: 12px
+        .support
+          .icon
+            display: inline-block
+            width: 12px
+            height: 12px
+            margin-right: 4px
+            vertical-align: middle
+            background-size: 12px 12px
+            background-repeat: no-repeat
+            &.decrease
+              bg-image('decrease_1')
+            &.discount
+              bg-image('discount_1')
+            &.guarantee
+              bg-image('guarantee_1')
+            &.invoice
+              bg-image('invoice_1')
+            &.special
+              bg-image('special_1')
+          .text
+            line-height: 12px
+            font-size: 12px
 </style>
