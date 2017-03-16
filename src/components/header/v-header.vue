@@ -17,16 +17,24 @@
           <span class="text">{{seller.support[0].description}}</span>
         </div>
       </div>
-      <div v-if="seller.support" class="support-count">
+      <div v-if="seller.support" class="support-count" @click="showDetail">
         <span class="count">{{seller.support.length}} 个</span>
       </div>
     </div>
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
+    </div>
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrapper clearfix">
+        <div class="detail-main">
+          <p>{{seller.bulletin}}</p>
+        </div>
+      </div>
+      <div class="detail-close" @click="showDetail">X</div>
     </div>
   </div>
 </template>
@@ -36,6 +44,16 @@
     props: {
       seller: {
         type: Object
+      }
+    },
+    data () {
+      return {
+        detailShow: false
+      }
+    },
+    methods: {
+      showDetail () {
+          this.detailShow = !this.detailShow
       }
     },
     created () {
@@ -50,6 +68,7 @@
     position: relative
     color: #fff
     background-color: rgba(7, 17, 27, 0.4)
+    overflow: hidden
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px
@@ -143,4 +162,28 @@
       height: 100%
       z-index: -1
       filter: blur(8px)
+
+    .detail
+      position: fixed
+      left: 0
+      top: 0
+      z-index: 100
+      width: 100%
+      height: 100%
+      overflow: auto
+      background-color: rgba(7, 17, 27, 0.8)
+      .detail-wrapper
+        min-height: 100%
+        .detail-main
+          margin-top: 64px
+          padding-bottom: 64px
+
+      .detail-close
+        margin-top: -32px
+        height: 32px
+        line-height: 32px
+        font-weight: bolder
+        color: #fff
+        text-align: center
+        clear: both
 </style>
