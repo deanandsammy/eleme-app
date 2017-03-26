@@ -11,6 +11,7 @@
         </div>
         <div class="description">
           {{seller.description}} / {{seller.deliveryTime}}分钟送达
+
         </div>
         <div class="support" v-if="seller.support">
           <span class="icon" v-bind:class="classMap[seller.support[2].type]"></span>
@@ -32,6 +33,14 @@
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
+          <div class="star-wrapper">
+            <star :size="48" :score="seller.score"></star>
+          </div>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text">优惠信息</div>
+            <div class="line"></div>
+          </div>
         </div>
       </div>
       <div class="detail-close" @click="showDetail">X</div>
@@ -39,7 +48,9 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+  import star from 'components/star/star'
+
   export default {
     props: {
       seller: {
@@ -53,8 +64,11 @@
     },
     methods: {
       showDetail () {
-          this.detailShow = !this.detailShow
+        this.detailShow = !this.detailShow
       }
+    },
+    components: {
+      star
     },
     created () {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
@@ -175,13 +189,30 @@
       .detail-wrapper
         min-height: 100%
         .detail-main
-          margin-top: 64px
+          padding-top: 64px
           padding-bottom: 64px
           .name
             font-size: 16px
             font-weight: 700
             line-height: 16px
             text-align: center
+          .star-wrapper
+            margin-top: 18px
+            padding: 2px 0
+            text-align: center
+          .title
+            display: flex
+            width: 80%
+            margin: 30px auto 24px
+            .line
+              flex: 1
+              position: relative
+              top: -6px
+              border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+            .text
+              padding: 0 12px
+              font-size: 14px
+              font-weight: 700
       .detail-close
         margin-top: -32px
         height: 32px
