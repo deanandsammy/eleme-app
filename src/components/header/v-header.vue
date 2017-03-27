@@ -12,6 +12,7 @@
         <div class="description">
           {{seller.description}} / {{seller.deliveryTime}}分钟送达
 
+
         </div>
         <div class="support" v-if="seller.support">
           <span class="icon" v-bind:class="classMap[seller.support[2].type]"></span>
@@ -40,6 +41,20 @@
             <div class="line"></div>
             <div class="text">优惠信息</div>
             <div class="line"></div>
+          </div>
+          <ul v-if="seller.support" class="support">
+            <li v-for="(item, index) in seller.support" class="support-item">
+              <span class="icon" v-bind:class="classMap[seller.support[index].type]"></span>
+              <span class="text">{{seller.support[index].description}}</span>
+            </li>
+          </ul>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text">商家公告</div>
+            <div class="line"></div>
+          </div>
+          <div class="bulletin">
+            <p class="content">{{seller.bulletin}}</p>
           </div>
         </div>
       </div>
@@ -213,6 +228,44 @@
               padding: 0 12px
               font-size: 14px
               font-weight: 700
+          .support
+            width: 80%
+            margin: 0 auto
+            .support-item
+              padding: 0 12px
+              margin-bottom: 12px
+              font-size: 0
+              &:last-child
+                margin-bottom: 0
+              .icon
+                display: inline-block
+                width: 16px
+                height: 16px
+                vertical-align: middle
+                margin-right: 6px
+                background-size: 16px 16px
+                background-repeat: no-repeat
+                &.decrease
+                  bg-image('decrease_2')
+                &.discount
+                  bg-image('discount_2')
+                &.guarantee
+                  bg-image('guarantee_2')
+                &.invoice
+                  bg-image('invoice_2')
+                &.special
+                  bg-image('special_2')
+              .text
+                font-size: 12px
+                line-height: 16px
+                vertical-align: middle
+          .bulletin
+            width: 80%
+            margin: 0 auto
+            .content
+              padding: 0 12px
+              line-height: 24px
+              font-size: 12px
       .detail-close
         margin-top: -32px
         height: 32px
