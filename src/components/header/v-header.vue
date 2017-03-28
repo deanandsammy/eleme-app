@@ -13,6 +13,8 @@
           {{seller.description}} / {{seller.deliveryTime}}分钟送达
 
 
+
+
         </div>
         <div class="support" v-if="seller.support">
           <span class="icon" v-bind:class="classMap[seller.support[2].type]"></span>
@@ -30,36 +32,38 @@
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
-    <div v-show="detailShow" class="detail">
-      <div class="detail-wrapper clearfix">
-        <div class="detail-main">
-          <h1 class="name">{{seller.name}}</h1>
-          <div class="star-wrapper">
-            <star :size="48" :score="seller.score"></star>
-          </div>
-          <div class="title">
-            <div class="line"></div>
-            <div class="text">优惠信息</div>
-            <div class="line"></div>
-          </div>
-          <ul v-if="seller.support" class="support">
-            <li v-for="(item, index) in seller.support" class="support-item">
-              <span class="icon" v-bind:class="classMap[seller.support[index].type]"></span>
-              <span class="text">{{seller.support[index].description}}</span>
-            </li>
-          </ul>
-          <div class="title">
-            <div class="line"></div>
-            <div class="text">商家公告</div>
-            <div class="line"></div>
-          </div>
-          <div class="bulletin">
-            <p class="content">{{seller.bulletin}}</p>
+    <transition name="fade">
+      <div v-show="detailShow" class="detail">
+        <div class="detail-wrapper clearfix">
+          <div class="detail-main">
+            <h1 class="name">{{seller.name}}</h1>
+            <div class="star-wrapper">
+              <star :size="48" :score="seller.score"></star>
+            </div>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">优惠信息</div>
+              <div class="line"></div>
+            </div>
+            <ul v-if="seller.support" class="support">
+              <li v-for="(item, index) in seller.support" class="support-item">
+                <span class="icon" v-bind:class="classMap[seller.support[index].type]"></span>
+                <span class="text">{{seller.support[index].description}}</span>
+              </li>
+            </ul>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">商家公告</div>
+              <div class="line"></div>
+            </div>
+            <div class="bulletin">
+              <p class="content">{{seller.bulletin}}</p>
+            </div>
           </div>
         </div>
+        <div class="detail-close" @click="showDetail">X</div>
       </div>
-      <div class="detail-close" @click="showDetail">X</div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -201,6 +205,12 @@
       height: 100%
       overflow: auto
       background-color: rgba(7, 17, 27, 0.8)
+      /* ios 系统有效的背景模糊效果 */
+      backdrop-filter: blur(10px)
+      &.fade-enter-active, &.fade-leave-active
+        transition: opacity .6s
+      &.fade-enter, &.fade-leave-active
+        opacity: 0
       .detail-wrapper
         min-height: 100%
         .detail-main
