@@ -16,6 +16,8 @@
 
 
 
+
+
         </div>
         <div class="support" v-if="seller.support">
           <span class="icon" v-bind:class="classMap[seller.support[2].type]"></span>
