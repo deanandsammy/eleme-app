@@ -14,7 +14,8 @@
     "html-entities": "^1.2.0",
     "strip-ansi": "^3.0.1",
     "vue": "^2.1.10",
-    "vue-router": "^2.2.1"
+    "vue-router": "^2.2.1",
+    "better-scroll": "^0.1.7"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
