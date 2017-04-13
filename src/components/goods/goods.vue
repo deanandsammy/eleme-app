@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="item in goods" class="menu-item">
+        <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}">
           <span class="text">
             <span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -25,7 +25,8 @@
                   <span class="count">月售{{food.sellCount}}</span><span>好评率{{food.rating}}%</span>
                 </div>
                 <div class="price">
-                  <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  <span class="now">￥{{food.price}}</span><span class="old"
+                                                                v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
               </div>
             </li>
@@ -48,7 +49,21 @@
     data () {
       return {
         goods: [],
-        listHeight: []
+        listHeight: [],
+        scrollY: 0
+      }
+    },
+    computed: {
+      currentIndex () {
+        for (let i = 0; i < this.listHeight.length; i++) {
+          let height1 = this.listHeight[i]
+          let height2 = this.listHeight[i + 1]
+
+          if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+            return i
+          }
+        }
+        return 0
       }
     },
     created () {
@@ -68,7 +83,14 @@
     methods: {
       _initScroll () {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
-        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {})
+
+        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+          probeType: 3
+        })
+
+        this.foodsScroll.on('scroll', (pos) => {
+          this.scrollY = Math.abs(Math.round(pos.y))
+        })
       },
       _calculateHeight () {
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook')
@@ -76,7 +98,9 @@
 
         this.listHeight.push(height)
         for (let i = 0; i < foodList.length; i++) {
-
+          let item = foodList[i]
+          height += item.clientHeight
+          this.listHeight.push(height)
         }
       }
     }
@@ -99,10 +123,18 @@
       background: #f3f5f7
       .menu-item
         display: table
-        margin: 0 auto;
-        width: 56px
+        width: 100%
         height: 54px
         line-height: 14px
+        text-align: center
+        &.current
+          position: relative
+          z-index: 10
+          margin-top: -1px
+          background: #fff
+          font-weight: 700
+          .text
+            border-none()
         .icon
           display: inline-block
           vertical-align: top
