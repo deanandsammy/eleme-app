@@ -11,13 +11,6 @@
         </div>
         <div class="description">
           {{seller.description}} / {{seller.deliveryTime}}分钟送达
-
-
-
-
-
-
-
         </div>
         <div class="support" v-if="seller.support">
           <span class="icon" v-bind:class="classMap[seller.support[2].type]"></span>

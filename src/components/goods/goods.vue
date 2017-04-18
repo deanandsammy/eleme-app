@@ -35,11 +35,14 @@
         </li>
       </ul>
     </div>
+    <shopcart></shopcart>
   </div>
 </template>
 
 <script>
   import BScroll from 'better-scroll'
+  import shopcart from 'components/shopcart/shopcart'
+
   const ERR_OK = 0
   export default {
     props: {
@@ -47,6 +50,7 @@
         type: Object
       }
     },
+
     data () {
       return {
         goods: [],
@@ -54,6 +58,7 @@
         scrollY: 0
       }
     },
+
     computed: {
       currentIndex () {
         for (let i = 0; i < this.listHeight.length; i++) {
@@ -67,6 +72,7 @@
         return 0
       }
     },
+
     created () {
       this.$http.get('api/goods').then((response) => {
         response = response.data
@@ -81,6 +87,7 @@
 
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
     },
+
     methods: {
       selectMenu (index, event) {
         if (!event._constructed) {
@@ -116,6 +123,10 @@
           this.listHeight.push(height)
         }
       }
+    },
+
+    components: {
+      shopcart
     }
   }
 </script>
