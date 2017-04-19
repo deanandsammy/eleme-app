@@ -26,8 +26,8 @@
                   <span class="count">月售{{food.sellCount}}</span><span>好评率{{food.rating}}%</span>
                 </div>
                 <div class="price">
-                  <span class="now">￥{{food.price}}</span><span class="old"
-                                                                v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  <span class="now">¥{{food.price}}</span><span class="old"
+                                                                v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                 </div>
               </div>
             </li>
@@ -35,7 +35,7 @@
         </li>
       </ul>
     </div>
-    <shopcart></shopcart>
+    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
